@@ -1,5 +1,5 @@
 function Bobble() {
-  this.head = createVector(width / 4, height - 40);
+  this.head = createVector(width / 4, height - (height/16));
   this.movement = createVector(0, 0);
   this.jump = -15;
   this.grav = 0.6;
@@ -32,7 +32,7 @@ function Bobble() {
       this.movement.y = 0;
     }
     fill(255, 0, 0);
-    rect(this.head.x, this.head.y, 30, 80);
+    rect(this.head.x, this.head.y, width/40, height/8);
   }
 
   this.up = function() {
@@ -51,6 +51,18 @@ function Bobble() {
       this.movement.x = 0;
     }
     this.movement.x += 1;
+  }
+
+  this.Stop = function(){
+    this.movement.x = 0;
+  }
+
+  this.halfSpeed = function(){
+    this.maxSpeed = 1;    
+  }
+
+  this.fullSpeed = function(){
+    this.maxSpeed =5;
   }
 
   this.update = function() {
