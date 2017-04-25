@@ -42,7 +42,7 @@ function draw() {
     var xoff = 0;
     for (var x = 0; x < cols; x++) {
       var index = x + y * cols;
-      var angle = noise(xoff, yoff, zoff) * QUARTER_PI * 6;
+      var angle = noise(xoff, yoff, zoff) * QUARTER_PI * 9;
       var v = p5.Vector.fromAngle(angle);
       v.setMag(1);
       flowfield[index] = v;
@@ -57,6 +57,6 @@ function draw() {
     particles[i].follow(flowfield);
     particles[i].update();
     particles[i].edges();
-    particles[i].show();
+    particles[i].show(i);
   }
   }

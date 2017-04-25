@@ -4,18 +4,11 @@
 // Code for: https://youtu.be/BjoM9oKOAKY
 
 function Particle() {
-  this.a = 30;
-  this.l = 1;
-  this.colors = this.orange;
-  this.orange = color(232, 175, 65);
-  this.yellow = color(255, 249, 80);
   this.pos = createVector(random(width), random(height));
   this.vel = createVector(0, 0);
   this.acc = createVector(0, 0);
   this.maxspeed = 4;
-  this.i = 0;
   this.prevPos = this.pos.copy();
-  setInterval(5000, this.chameleon);
   this.update = function() {
     this.vel.add(this.acc);
     this.vel.limit(this.maxspeed);
@@ -35,31 +28,14 @@ function Particle() {
     this.acc.add(force);
   }
 
-  this.chameleon = function() {
-    this.i = this.i + 1;
-    if (this.i > 12) {
-      this.i = 0;
-    }
-    if (this.colors === this.orange) {
-      this.colors = this.yellow;
-    } else {
-      this.colors = this.orange;
-    }
-    this.a = 30;
-    this.a += 10;
-    if (this.a < 30) {
-      this.a = 30;
-    }
-    this.l = .2;
-    this.l += .1;
-    if (this.l > .5) {
-      l = 1;
-    }
-  }
 
-  this.show = function() {
-    stroke(this.colors);
-    strokeWeight(this.l);
+  this.show = function(i) {
+    if (i%2 === 0) {
+      stroke(232, 175, 65,100);
+    } else {
+      stroke(255, 249, 80,100);
+    }
+    strokeWeight(0.5);
     line(this.pos.x, this.pos.y, this.prevPos.x, this.prevPos.y);
     this.updatePrev();
   }

@@ -5,15 +5,11 @@
 
 function Particle() {
   this.w = 200;
-  this.a = 30;
-  this.l = 1;
   this.pos = createVector(random(width), random(height));
   this.vel = createVector(0, 0);
   this.acc = createVector(0, 0);
   this.maxspeed = 4;
-  this.i = 0;
   this.prevPos = this.pos.copy();
-  setInterval(5000, this.chameleon);
   this.update = function() {
     this.vel.add(this.acc);
     this.vel.limit(this.maxspeed);
@@ -33,31 +29,14 @@ function Particle() {
     this.acc.add(force);
   }
 
-  this.chameleon = function() {
-    this.i = this.i + 1;
-    if (this.i > 12) {
-      this.i = 0;
-    }
-    if(this.w === 192){
-    this.w = 255;
+  this.show = function(i) {
+    if(i%2=== 0){
+      this.w = 255;
     }else{
-    this.w = 192;
+      this.w = 192;
     }
-    this.a = 30;
-    this.a += 10;
-    if (this.a < 30) {
-      this.a = 30;
-    }
-    this.l = 1;
-    this.l += .5;
-    if (this.l > 2) {
-      l = 1;
-    }
-  }
-
-  this.show = function() {
-    stroke(this.w, this.w, this.w, this.a);
-    strokeWeight(this.l);
+    stroke(this.w, this.w, this.w, 100);
+    strokeWeight(0.5);
     line(this.pos.x, this.pos.y, this.prevPos.x, this.prevPos.y);
     this.updatePrev();
   }
