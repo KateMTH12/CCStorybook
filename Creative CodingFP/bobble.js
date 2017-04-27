@@ -31,8 +31,8 @@ function Bobble() {
     } else if (this.head.y <= height - 200) {
       this.movement.y = 0;
     }
-    fill(255, 0, 0);
-    rect(this.head.x, this.head.y, width/40, height/8);
+    //fill(255, 0, 0);
+    //rect(this.head.x, this.head.y, width/40, height/8);
   }
 
   this.up = function() {

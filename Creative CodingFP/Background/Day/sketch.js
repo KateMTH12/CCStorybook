@@ -30,7 +30,6 @@ function setup() {
   for (var i = 0; i < 300; i++) {
     particles[i] = new Particle();
   }
-
   background(180, 235, 255);
   noCursor();
 
