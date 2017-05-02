@@ -3,7 +3,8 @@ function Indoors(){
 		fill(232,335,124);
 		noStroke();
 		rect(width/2,height/2, width,height);
-		strokeWeight(1);
-		stroke(0);
+		strokeWeight(28);
+		stroke(139,69,19);
+		line(width/2,0,width/2,height);
 	}
 }

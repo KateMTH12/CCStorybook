@@ -10,6 +10,7 @@ function Particle() {
   this.acc = createVector(0, 0);
   this.maxspeed = 4;
   this.prevPos = this.pos.copy();
+  this.star = createVector(random(width),random(height/3));
   this.update = function() {
     this.vel.add(this.acc);
     this.vel.limit(this.maxspeed);
@@ -67,6 +68,9 @@ function Particle() {
     }
     if (abs(dist(this.pos.x, this.pos.y, width / 6, height / 4)) < 200) {
       this.avoid();
+    }
+    if(abs(dist(this.pos.x,this.pos.y,this.star.x,this.star.y))<100){
+      this.avoid
     }
   }
 

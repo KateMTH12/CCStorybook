@@ -3,8 +3,8 @@ function RLGL() {
   this.yellowLight = false;
   this.display = function(counting) {
     noStroke();
-		fill(255);
-		rect(width/2,height/2,width,height);
+    fill(80);
+    rect(width / 2, height - (height / 12), width, height / 6);
     fill(10);
     strokeWeight(1);
     rect((width / 2) - 150, 60, 40, 120);
@@ -46,7 +46,8 @@ function RLGL() {
       this.redLight = true;
       this.yellowLight = false;
     }
-    fill(0);
-    rect(60, height / 3, 120, 120);
   }
+  strokeWeight(28);
+  stroke(255,247,89);
+  line(width/2,height,width/2,height-50);
 }

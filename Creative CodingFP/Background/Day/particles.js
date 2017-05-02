@@ -64,7 +64,7 @@ function Particle() {
       this.pos.y = height;
       this.updatePrev();
     }
-    if (abs(dist(this.pos.x, this.pos.y, width / 6, height / 4)) < 200) {
+    if (abs(dist(this.pos.x, this.pos.y, width-width / 6, height / 4)) < 200) {
       this.avoid();
     }
   }

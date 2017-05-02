@@ -2,8 +2,7 @@ function Park() {
   this.angle = 0.56;
   this.display = function() {
     noStroke();
-		fill(255);
-		rect(width/2,height/2,width,height);
+		
     noStroke();
     fill(34, 97, 37);
     rect(width / 2, height - (height / 12), width, height / 6);
