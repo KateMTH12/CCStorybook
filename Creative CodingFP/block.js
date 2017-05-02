@@ -1,4 +1,13 @@
+// Daniel Shiffman
+// http://codingtra.in
+// http://patreon.com/codingtrain
+// Code for: https://youtu.be/cXgA1d_E-jY&
 function Block() {
+  /*This is all the blocks movement. The head is the basis for all movement. I adapted the jump code from
+  Flappy Bird to create the jump. I keep track of when we cross center to help climb stairs. The counter
+  keeps track of how many times it has gone back and forth so I can switch scenes. The climb is achieved
+  by turning off gravity*/
+  
   this.head = createVector(3 * (width / 4), height - (height / 16));
   this.movement = createVector(0, 0);
   this.jump = -15;
@@ -20,6 +29,7 @@ function Block() {
       this.switched();
       this.center = false;
     }
+    //I use a boolean to check if they have switched sides especially because in the middle it is a little glitchy depending on the speed.
     if (this.head.x < ((width / 2) + 14) && this.head.x > ((width / 2) - 14)) {
       this.last = this.crossed;
       this.crossed = true;
@@ -56,7 +66,7 @@ function Block() {
     }
     this.movement.x += 1;
   }
-
+  //These three commands are for the red light green light game
   this.Stop = function() {
     this.movement.x = 0;
   }

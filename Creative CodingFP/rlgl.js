@@ -1,4 +1,5 @@
 function RLGL() {
+  /*This plays red light green light and is just the walk and road signals.*/
   this.redLight = false;
   this.yellowLight = false;
   this.display = function(counting) {

@@ -1,4 +1,6 @@
 function City() {
+  /*This draws the city, probably should have used classes here as well. The clouds follow the characters
+  just for fun.*/
   this.cloud;
   this.cloud = loadImage('cloud.png');
   this.display = function() {
@@ -27,6 +29,7 @@ function City() {
   this.door = function(x, y) {
     rect(x, y, 80, 300);
   }
+  /*This draws the wires and telephone poles using a for loop.*/
   this.telephone = function() {
     for (var i = 50; i < width; i += 450) {
       fill(97, 97, 97);

@@ -1,4 +1,5 @@
  function House() {
+   /*Theis draws the inside of the house as well as the stairs.*/
    this.display = function() {
      noStroke();
      fill(255);

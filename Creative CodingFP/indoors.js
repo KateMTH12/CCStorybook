@@ -1,4 +1,5 @@
 function Indoors(){
+  /*This draws the inside of the diner*/
 	this.display = function(){
 		fill(232,335,124);
 		noStroke();

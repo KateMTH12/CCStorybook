@@ -2,7 +2,10 @@
 // http://codingtra.in
 // http://patreon.com/codingtrain
 // Code for: https://youtu.be/BjoM9oKOAKY
-
+/*Adjusted this to create teh background was going to run it in the program but it slowed 
+everything down so I instead screenshotted it after running it for a bit. I wrote the avoid code
+to create the sun, the res is Shiffmans. The flowfield works essensially by haveing a lot of tiny vector forces
+that are spinning slowly and the points are moving through kind of like a maze*/
 function Day() {
   this.pos = createVector(random(width), random(height));
   this.vel = createVector(0, 0);
@@ -30,6 +33,7 @@ function Day() {
 
 
   this.show = function(i) {
+    // This part too I wanted two colors in the sun.
     if (i%2 === 0) {
       stroke(232, 175, 65,100);
     } else {
@@ -64,6 +68,7 @@ function Day() {
       this.pos.y = height;
       this.updatePrev();
     }
+    //This and the this.avoid() are the only parts I wrote.
     if (abs(dist(this.pos.x, this.pos.y, width / 6, height / 4)) < 200) {
       this.avoid();
     }

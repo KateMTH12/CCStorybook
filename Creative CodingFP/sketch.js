@@ -1,3 +1,6 @@
+/*There are a lot of variables because of all the images I imported, but I drew them
+all myself in illustrator, except the tree and backgrounds which were coded.Some of the commented out code was because I tried t put the
+trree and flowfield in the running code some are things that didn't work out*/
 var x = 0;
 var y = 50;
 var switchem = false;
@@ -87,29 +90,9 @@ var bird;
 var blueCar;
 var redCar;
 var words;
-/*function mousePressed() {
-  for (var i = tree.length - 1; i >= 0; i--) {
-    if (!tree[i].finished) {
-      tree.push(tree[i].branchA());
-      tree.push(tree[i].branchB());
-    }
-    tree[i].finished = true;
-  }
-  count++;
-
-  if (count === 6) {
-    for (var j = 0; j < tree.length; j++) {
-      if (!tree[j].finished) {
-        var leaf = tree[j].end.copy();
-        leaves.push(leaf);
-      }
-    }
-  }
-*/
-
-
 
 function preload() {
+  //Chose a comic type font because it fit my style.
   font = loadFont('ActionMan.ttf');
   cashier = loadImage('cashier.png');
   stopFlip = loadImage('flipstop.png');
@@ -149,10 +132,12 @@ function setup() {
   createCanvas(windowWidth - 20, windowHeight - 50);
   textFont(font);
   textSize(30);
+  //Timer counted seconds for animations
   setInterval(timer, 1000)
   rectMode(CENTER);
   ellipseMode(CENTER);
   imageMode(CENTER);
+  //Creating instances so all the code would work together
   block = new Block();
   bobble = new Bobble();
   city = new City();
@@ -186,6 +171,8 @@ function setup() {
 }
 
 function draw() {
+  //block.counter helps move throught the scenes
+  /*These booleans at the beginning change the maxSpeed and what text will pop up*/
   if (block.counter > 40) {
     end = true;
   } else {
@@ -198,6 +185,7 @@ function draw() {
   }
   if (block.counter % 10 != 6 && block.counter % 10 != 7) {
     stairs = false;
+    //resets movement vectors
     block.resetter();
     bobble.resetter();
   } else {
@@ -219,13 +207,16 @@ function draw() {
       image(days, width / 2, height / 2 - 200);
     }
     city.display();
+    //door classes
     fill(0, 255, 0);
     city.door((width / 3), (height - 50));
     fill(255, 0, 120);
     city.door((2 * (width / 3)), (height - 50));
+    //rainclouds follow over head
     city.clouds(block.head.x, block.head.y - 500);
     city.clouds(bobble.head.x, bobble.head.y - 500);
     city.telephone();
+    //shows the rain
     for (var m = 0; m < rain.length; m++) {
       var r = rain[m];
       r.update();
@@ -240,17 +231,17 @@ function draw() {
     image(bench, width - width / 3, height - 100);
     image(bus, width - 300, height - 180);
     image(soccer, width / 7, height - 20);
+    //calls the birds
     bird.display(counting);
     bird.update();
+    //callse the words which pop up when you are near the bus stop
     words.update(width - 300, block.head.x);
     words.display(width - 300, block.head.x, atPark, diner);
+    //limits it to a max of 10 bees
     if (bees.length > 10) {
       bees.splice(0, 1);
     }
-    /*for (var i = 0; i < tree.length; i++) {
-      tree[i].show();
-      //tree[i].jitter();
-    }*/
+    //shows bees
     for (var n = 0; n < bees.length; n++) {
       var b = bees[n];
       b.behaviors();
@@ -262,6 +253,7 @@ function draw() {
   } else if (block.counter % 10 < 6) {
 
     if (block.counter > 30) {
+      //I wanted to switch between day and night as time went on.
       image(night, width / 2, height / 2 - 70);
     } else {
       image(days, width / 2, height / 2 - 70);
@@ -269,6 +261,7 @@ function draw() {
     rlgl.display(counting);
     image(redCar, width / 4, height - 200);
     image(blueCar, width - width / 4, height - 200);
+    /*decides animation to play RLGL*/
     if (rlgl.redLight === true) {
       block.Stop();
       bobble.Stop();
@@ -312,9 +305,11 @@ function draw() {
     image(two, width - width / 4, height - 100);
     image(blueTable, width / 4, height - 70);
     image(yellowTable, 50, height - 70);
+    //for loop draws the lights
     for (var i = 100; i < width - 100; i += 150) {
       image(light, i, height / 5);
     }
+    //words pop up
     words.update(width / 2.5, bobble.head.x);
     words.display(width / 2.5, bobble.head.x, atPark, diner);
   }
@@ -325,6 +320,7 @@ function draw() {
   bobble.update();
   //ellipse(width-bobble.head.x, bobble.head.y,50,50);
   //if (abs(bobble.movement.x) < 3) {
+  //animates the characters
   if (bobble.movement.x < 0) {
     if (counting % 2 === 0) {
       image(blockR, block.head.x, block.head.y - 60);
@@ -345,6 +341,7 @@ function draw() {
     image(blockStill, block.head.x, block.head.y - 60);
     image(bobStill, bobble.head.x, bobble.head.y - 60);
   }
+  //thought about speeding them up
   //}
   /*if (abs(bobble.movement.x) > 3) {
     if (bobble.movement.x < 0) {
@@ -368,6 +365,7 @@ function draw() {
       image(bobStill, bobble.head.x, bobble.head.y - 60);
     }
   }
+  //left over code from flow fields
   var yoff = 0;
   for (var y = 0; y < rows; y++) {
     var xoff = 0;
@@ -391,29 +389,34 @@ function draw() {
     days[i].show(i);
   }
   */
-
+  //starts the end of the game where they realize they are in one world together and are neighbors
   if (end === false) {
     stroke(0);
     strokeWeight(28);
     line(width / 2, 0, width / 2, height);
   }
+  //used to figure out if I can climb the stairs
   fromCenter = block.center;
 
 }
 
 function timer() {
+  //for animation
   counting++;
 }
 
 function keyPressed() {
+  //Creates raindrops for each when keys are pressed
   rain.push(new Rain(block.head.x, block.head.y, block.head.x, block.head.y - 300));
   rain.push(new Rain(bobble.head.x, bobble.head.y, bobble.head.x, bobble.head.y - 300));
 
+//mirrored movement
   if (keyCode === LEFT_ARROW) {
     block.Right();
     if (end === false) {
       bobble.Left();
     }
+    //makes you get down stairs if you change direction on the stairs
     last = left;
     left = true;
     if (last != left) {
@@ -422,6 +425,9 @@ function keyPressed() {
       changeDirect = false;
     }
     if (fromCenter === true) {
+      //how to climb the stairs it is still not perfect, but it roughly simulates climbing
+      //I did not write anything for coming from the sides and it still climbs when it shouldn't somethimes, if you change direction too much
+      //or if you climb too fast or too slow it looks weird.
       if (left === true) {
         if (stairs === true && (block.head.x < 360 || bobble.head.x > width - 360)) {
           block.climb();
@@ -483,6 +489,7 @@ function keyPressed() {
       }
     }
   }
+  //makes the bees
   if (key === ' ') {
     bees.push(new Vehicle(width / 5, height / 3));
     //if (block.head.x << ((width / 3) + 30) && block.head.x >> (2 * (width / 3)) - 30) {
@@ -495,6 +502,7 @@ function keyPressed() {
     block.Stop();
     bobble.Stop();
   }
+  //this is for the end game I wanted there to be seperate controls at the end so you had to think more about both
   if (end === true) {
     if (key === 65) {
       bobble.Left();
@@ -503,5 +511,6 @@ function keyPressed() {
       bobble.Right();
     }
   }
+  //leftover put it elsewhere because it was slowing down the code
   //bees.push(new Bees(random(49), random(10)));
 }

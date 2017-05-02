@@ -2,7 +2,8 @@
 // http://codingtra.in
 // http://patreon.com/codingtrain
 // Code for: https://youtu.be/BjoM9oKOAKY
-
+/*Same as the day code I took it out later because it was slowing everything down, made a moon with
+the this.avoid()*/
 function Night() {
   this.w = 200;
   this.pos = createVector(random(width), random(height));
@@ -30,9 +31,11 @@ function Night() {
   }
 
   this.show = function(i) {
-    if(i%2=== 0){
+    // This part too I wanted two colors in the sun.
+
+    if (i % 2 === 0) {
       this.w = 255;
-    }else{
+    } else {
       this.w = 192;
     }
     stroke(this.w, this.w, this.w, 100);
@@ -65,6 +68,7 @@ function Night() {
       this.pos.y = height;
       this.updatePrev();
     }
+    //This and the this.avoid() are the only parts I wrote.
     if (abs(dist(this.pos.x, this.pos.y, width / 6, height / 4)) < 200) {
       this.avoid();
     }

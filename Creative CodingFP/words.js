@@ -1,4 +1,6 @@
 function Words() {
+  /*I wrote this code to have the text pop up. I chose to add this so it would have more of a narrative
+  I used boooleans to decide what would be said at what scene and distance to decide when it would pop up.*/
   this.loc = 0;
   this.thoughtbubble;
   this.thoughtbubble = loadImage('thoughtbubble.png');

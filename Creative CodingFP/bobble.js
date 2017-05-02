@@ -1,4 +1,6 @@
 function Bobble() {
+  /*This code mirrors the bobble code I wrote them seperatly so they could be controlled seperatly at the end of 
+  the story*/
   this.head = createVector(width / 4, height - (height/16));
   this.movement = createVector(0, 0);
   this.jump = -15;

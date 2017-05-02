@@ -1,4 +1,7 @@
 function Bird() {
+  /*This animates a bird as it flies across the screen. I made two birds and two different flight
+  patterns. It probably would have made more sense to use classes, but since I only have two
+  this is fine. There is no acceleration so they jsut fly on a pretty standard loop.*/
   this.birdie;
   this.birdie = loadImage('bird.png');
   this.birdFlap1;
@@ -17,6 +20,7 @@ function Bird() {
     /*if (abs(height / 5 - this.travel.x) > 5) {
       image(this.birdie, this.travel.x, this.travel.y);
     }*/
+    /*This allows for it to create really basic animation as it appears to move by flipping between two similar frames.*/
     if (counting % 2 === 0) {
       image(this.birdFlap1, this.travel.x, this.travel.y);
       image(this.bird2, this.traveler.x, this.traveler.y);
@@ -27,6 +31,7 @@ function Bird() {
     }
   }
   this.update = function() {
+    /*Keeps it onscreen and moving*/
     this.travel.add(this.flight);
     if (this.travel.x > width) {
       this.travel.x = 0;

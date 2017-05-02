@@ -1,3 +1,10 @@
+// Daniel Shiffman
+// http://codingtra.in
+// Steering Text Paths
+// Video: https://www.youtube.com/watch?v=4hA7G3gup-4
+/*This code was adapted from some code I had written after turning Shiffman's code in to rain. I wanted
+it to bounce of the characters heads, but I didn't get that to work properly and am also only using
+it in one demension. Like the bee.js it is almost entirely Shiffman's code I just played with variable to get the effect I wanted.*/
 function Rain(x,y,x1,y1) {
   this.x = random(x1-80,x1+80);
   this.y = y1;
