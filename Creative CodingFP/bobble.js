@@ -73,4 +73,15 @@ function Bobble() {
   this.switched = function(){
     this.counter++;
   }
+  this.resetter = function(){
+    this.jump = -15;
+    this.grav = 0.6;
+  }
+  this.climb = function() {
+    this.jump = -5;
+    this.grav = 0;
+  }
+  this.down = function(){
+    this.grav = 0.4;
+  }
 }
