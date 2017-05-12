@@ -13,7 +13,7 @@ function Park() {
     fill(34, 97, 37);
     rect(width / 2, height - (height / 12), width, height / 6);
   }
-  //Shiffmans code
+  //Shiffmans code adjusted to make it the size and angle I wanted
   this.branch = function(len) {
     stroke(0);
     strokeWeight(0.5);

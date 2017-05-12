@@ -1,7 +1,8 @@
 function Bird() {
   /*This animates a bird as it flies across the screen. I made two birds and two different flight
   patterns. It probably would have made more sense to use classes, but since I only have two
-  this is fine. There is no acceleration so they jsut fly on a pretty standard loop.*/
+  this is fine. There is no acceleration so they jsut fly on a pretty standard loop. It
+  is time based like the walking characters.*/
   this.birdie;
   this.birdie = loadImage('bird.png');
   this.birdFlap1;

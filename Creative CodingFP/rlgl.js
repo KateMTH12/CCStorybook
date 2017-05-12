@@ -10,6 +10,9 @@ function RLGL() {
     strokeWeight(1);
     rect((width / 2) - 150, 60, 40, 120);
     rect((width / 2) + 150, 60, 40, 120);
+    //It is also timebased and is set to approximate actual
+    //crosswalk times. I only made the traffic signal on one side
+    //on purpose because thats how it is if you look head on.
     if (counting % 10 < 4) {
       fill(255, 0, 0, 80);
       //ellipse((width / 2) - 150, 30, 30, 30)

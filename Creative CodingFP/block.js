@@ -88,10 +88,13 @@ function Block() {
   this.switched = function() {
     this.counter++;
   }
+  //this resets the jumping height and gravity after climbing the stairs
   this.resetter = function(){
     this.jump = -15;
     this.grav = 0.6;
   }
+  //I "climbed" getting rid of gravity, but it isn't quite perfect climbing and takes
+  //knowing the program to achieve an actual climbing effect.
   this.climb = function() {
     this.jump = -5;
     this.grav = 0;

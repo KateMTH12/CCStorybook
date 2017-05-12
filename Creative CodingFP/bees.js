@@ -4,7 +4,8 @@
 // Video: https://www.youtube.com/watch?v=4hA7G3gup-4
 /* This code was adpated from Shiffmans tutorial on steering to a text path.
 I used it to have bees sawrm and appear when you hit the space bar.  I originally
-changed the variable names, but I messed up the code and restarted with the orginal code.*/
+changed the variable names, but I messed up the code and restarted with the orginal code.
+It uses vector forces to animate the mocement of the bees.*/
 function Vehicle(x, y) {
   /*takes in the x and y coordinates for the coordinate aka the bee hive the pos stores the vector
   position of each bee, the target is the hive and the vel and acc are for its movement the last
@@ -21,7 +22,7 @@ function Vehicle(x, y) {
     Because the scalar for the flee is higher it runs away faster than it finds the hive so
     it keeps doing the dance around the hive.*/
     var arrive = this.arrive(this.target);
-    var mouse = createVector(width / 5, height / 3);
+    var mouse = createVector(width / 5, height / 2.7);
     var flee = this.flee(mouse);
 
     arrive.mult(1);
@@ -46,7 +47,7 @@ function Vehicle(x, y) {
   this.show = function() {
     /*shows the bee as a black point*/
     stroke(0);
-    strokeWeight(this.r);
+    strokeWeight(5);
     point(this.pos.x, this.pos.y);
   }
 

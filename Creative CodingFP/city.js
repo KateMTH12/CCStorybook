@@ -11,20 +11,20 @@ function City() {
     rectMode(CENTER);
     ellipseMode(CENTER);
     noStroke();
-
+    //I redid the building sizes and positions so they would scale properly and cover the whole canvas
     strokeWeight(1);
     fill(0, 255, 255);
-    rect(width / 14, height - 450, width / 7, 900);
+    rect(width / 8, height - height/3, width /4 , height/1.5);
     fill(137, 120, 230);
-    rect(width / 2 - 200, height - 200, width / 5, 400);
+    rect(width / 4, height - height/2.5, 1.5*width / 5, height/1.15);
     fill(10, 97, 213);
-    rect(width / 2 + 130, height - 350, width / 6.5, 700);
+    rect(3*(width / 8), height - height/2.5, width / 4, height/1.25);
     fill(97, 23, 137);
-    rect(width - width / 10, height - 600, width / 5, 1200);
+    rect(width - 3*(width / 8), height - height/5, width / 4, height/2.5);
     fill(120, 20, 240);
-    rect((width / 4), height - 300, 2 * (width / 9), 600);
+    rect(width-(width / 8), height - height/3.1, 4*width/9, height/1.55);
     fill(120, 230, 130);
-    rect(width - (width / 4), height - 300, 2 * (width / 9), 600);
+    rect(width - (width / 4), height - height/2.8, width/3, height/1.4);
   }
   this.door = function(x, y) {
     rect(x, y, 80, 300);
@@ -42,6 +42,7 @@ function City() {
       arc(j + 225, height - 350, 450, 100, 0, PI);
     }
   }
+  //this makes the clouds that follow the people
   this.clouds = function(x,y) {
     image(this.cloud,x,y);
   }

@@ -1,6 +1,17 @@
 /*There are a lot of variables because of all the images I imported, but I drew them
 all myself in illustrator, except the tree and backgrounds which were coded.Some of the commented out code was because I tried t put the
-trree and flowfield in the running code some are things that didn't work out*/
+trree and flowfield in the running code some are things that didn't work out
+I found the music on jamendo.com and here is the info for the artist.
+CREDITS
+"Flowing Air" is a composition of the italian composer Mattia Vlad Morleo.
+
+Subscribe to the Mattia Vlad Morleo’s Youtube channel to be always notified of every news: http://bit.ly/2gEGh8y
+
+Follow Mattia Vlad Morleo on the Social Network:
+Facebook: http://www.facebook.com/MattiaVladMorleoOfficial
+Instagram: http://www.instagram.com/mattiamorleo
+Twitter: http://www.twitter.com/MattiaMorleo
+*/
 var x = 0;
 var y = 50;
 var switchem = false;
@@ -28,8 +39,7 @@ var bobStill;
 var bobR;
 var bobRR;
 
-var atPark = false;
-var diner = false;
+var scene;
 var font;
 
 var walkSign;
@@ -86,12 +96,18 @@ var blueroom;
 var soccer;
 var light;
 var bird;
-
+var treeNight;
+var arrow;
 var blueCar;
 var redCar;
 var words;
+var nightBus;
+//var pause;
+var music;
 
 function preload() {
+  music = loadSound('FlowingAir.mp3');
+
   //Chose a comic type font because it fit my style.
   font = loadFont('ActionMan.ttf');
   cashier = loadImage('cashier.png');
@@ -126,10 +142,13 @@ function preload() {
   soccer = loadImage('soccer.png');
   redCar = loadImage('redCar.png');
   blueCar = loadImage('blueCar.png');
+  treeNight = loadImage('treeNight.png');
+  arrow = loadImage('arrow.png');
+  nightBus = loadImage('nightBus.png');
 }
 
 function setup() {
-  createCanvas(windowWidth - 20, windowHeight - 50);
+  createCanvas(windowWidth, windowHeight);
   textFont(font);
   textSize(30);
   //Timer counted seconds for animations
@@ -147,7 +166,9 @@ function setup() {
   park = new Park();
   bird = new Bird();
   words = new Words();
-
+  //attempt at making a walking delay
+  //pause = setTimeout(delayer, 5000);
+  setInterval(song, 223000);
   /*
   cols = floor(width / scl);
   rows = floor(height / scl);
@@ -171,9 +192,12 @@ function setup() {
 }
 
 function draw() {
+  if(counting%223 === 0){
+    music.play();
+  }
   //block.counter helps move throught the scenes
   /*These booleans at the beginning change the maxSpeed and what text will pop up*/
-  if (block.counter > 40) {
+  if (block.counter > 20) {
     end = true;
   } else {
     end = false;
@@ -192,16 +216,9 @@ function draw() {
     stairs = true;
   }
 
-  if (block.counter % 10 != 3 && block.counter % 10 != 4) {
-    atPark = false;
-  }
-
-  if (block.counter % 10 != 8 && block.counter % 10 != 9) {
-    diner = false;
-  }
-
   if (block.counter % 10 < 3) {
-    if (block.counter > 30) {
+    //I changed the night day timer so it would cycle
+    if (floor(block.counter / 10) % 2 === 1) {
       image(night, width / 2, height / 2 - 200);
     } else {
       image(days, width / 2, height / 2 - 200);
@@ -223,21 +240,44 @@ function draw() {
       r.display();
     }
   } else if (block.counter % 10 < 5) {
-    atPark = true;
+    scene = 1;
+    if (floor(block.counter / 10) % 2 === 1) {
+      image(treeNight, width / 2, height / 2 - 100)
+    } else {
+      image(trees, width / 2, height / 2 - 100);
+    }
     park.display();
-    image(trees, width / 2, height / 2 - 100);
+
     image(hive, width / 5, height / 3);
     image(bench, width / 3, height - 100);
     image(bench, width - width / 3, height - 100);
-    image(bus, width - 300, height - 180);
+    if (block.counter < 10) {
+      image(bus, width - 300, height - 180);
+    } else {
+      image(nightBus, width - 300, height - 180);
+    }
     image(soccer, width / 7, height - 20);
     //calls the birds
     bird.display(counting);
     bird.update();
-    //callse the words which pop up when you are near the bus stop
+    //calls the words which pop up when you are near the bus stop
+    //I added a lot more text throughout
     words.update(width - 300, block.head.x);
-    words.display(width - 300, block.head.x, atPark, diner);
+    words.display(width - 300, block.head.x, block.head.y, scene, 1);
+    words.update(width - 300, bobble.head.x);
+    words.display(width - 300, bobble.head.x, bobble.head.y, scene, 2);
+    /*
+    Attempts at making them pause when reading so they would run in to
+    each other but still be controlled by one person. It didn't work out as
+    expected, but you could still try it, it doesn't crash the program.
+    if(words.close === true){
+      block.stop();
+    }*/
+    /*if(block.head.x === width-width/4){
+      pause;
+    }*/
     //limits it to a max of 10 bees
+
     if (bees.length > 10) {
       bees.splice(0, 1);
     }
@@ -251,8 +291,8 @@ function draw() {
 
     //park.tree();
   } else if (block.counter % 10 < 6) {
-
-    if (block.counter > 30) {
+    scene = 2;
+    if (floor(block.counter / 10) % 2 === 1) {
       //I wanted to switch between day and night as time went on.
       image(night, width / 2, height / 2 - 70);
     } else {
@@ -267,6 +307,9 @@ function draw() {
       bobble.Stop();
       image(stopWalking, 50, height / 3);
       image(stopFlip, width - 50, height / 3);
+      words.update(0, 0);
+      words.display(block.head.x, 0, block.head.y, scene, 1);
+      words.display(bobble.head.x, 0, bobble.head.y, scene, 2);
     } else if (rlgl.yellowLight === true) {
       block.halfSpeed();
       bobble.halfSpeed();
@@ -282,10 +325,19 @@ function draw() {
       bobble.fullSpeed();
     }
   } else if (block.counter % 10 < 8) {
+    scene = 3;
     house.display();
     house.stairs();
-    image(orangeroom, width / 4, height - 150);
-    image(blueroom, width - width / 4, height - 100);
+    image(orangeroom, width / 3, height - 150);
+    image(blueroom, width - width / 3, height - 100);
+    words.update(width / 3, block.head.x);
+    words.update((width - width / 3), bobble.head.x);
+    words.display(width / 3, block.head.x, block.head.y, scene, 1);
+    words.display((width - width / 3), bobble.head.x, bobble.head.y, scene, 2);
+    words.update(width / 4, bobble.head.x);
+    words.update((width - width / 4), block.head.x);
+    words.display(width / 4, bobble.head.x, bobble.head.y, scene, 1);
+    words.display((width - width / 4), block.head.x, block.head.y, scene, 2);
     //if(fromCenter === true && left === true && )
     /*if (stairs === true && (block.head.x < 360 || block.head.x > width - 360)) {
       block.climb();
@@ -298,7 +350,7 @@ function draw() {
     bobble.resetter();
   }*/
   } else if (block.counter % 10 < 10) {
-    diner = true;
+    scene = 4;
     indoors.display();
     image(piano, width / 2, height - 80);
     image(cashier, width / 2.5, height - 90);
@@ -311,7 +363,13 @@ function draw() {
     }
     //words pop up
     words.update(width / 2.5, bobble.head.x);
-    words.display(width / 2.5, bobble.head.x, atPark, diner);
+    words.display(width / 2.5, bobble.head.x, bobble.head.y, scene, 2);
+    words.update(width - width / 4, block.head.x);
+    words.display(width - width / 4, block.head.x, block.head.y, scene, 1);
+    words.update(width / 2.5, block.head.x);
+    words.display(width / 2.5, block.head.x, bobble.head.y, scene, 1);
+    words.update(width - width / 4, bobble.head.x);
+    words.display(width - width / 4, bobble.head.x, bobble.head.y, scene, 2);
   }
   strokeWeight(1);
   block.display();
@@ -389,7 +447,14 @@ function draw() {
     days[i].show(i);
   }
   */
-  //starts the end of the game where they realize they are in one world together and are neighbors
+  //At the beginning so you know who you control
+  if (counting < 10) {
+    if (counting % 2 === 0) {
+      image(arrow, bobble.head.x, bobble.head.y - 200);
+    }
+  }
+  //starts the end of the game where they realize they 
+  //are in one world together and are neighbors
   if (end === false) {
     stroke(0);
     strokeWeight(28);
@@ -397,7 +462,13 @@ function draw() {
   }
   //used to figure out if I can climb the stairs
   fromCenter = block.center;
-
+  //Ending message
+  if (end === true) {
+    words.update(block.head.x, bobble.head.x);
+    words.display(block.head.x, bobble.head.x, block.head.y, 6, 1);
+    words.update(bobble.head.x, block.head.x);
+    words.display(bobble.head.x, block.head.x, bobble.head.y, 6, 2);
+  }
 }
 
 function timer() {
@@ -405,16 +476,25 @@ function timer() {
   counting++;
 }
 
+/*attempt at delay function
+function delayer() {
+  block.Stop();
+}
+*/
+function song() {
+  music.play();
+}
+
 function keyPressed() {
   //Creates raindrops for each when keys are pressed
   rain.push(new Rain(block.head.x, block.head.y, block.head.x, block.head.y - 300));
   rain.push(new Rain(bobble.head.x, bobble.head.y, bobble.head.x, bobble.head.y - 300));
 
-//mirrored movement
+  //mirrored movement
   if (keyCode === LEFT_ARROW) {
-    block.Right();
+    bobble.Left();
     if (end === false) {
-      bobble.Left();
+      block.Right();
     }
     //makes you get down stairs if you change direction on the stairs
     last = left;
@@ -454,9 +534,9 @@ function keyPressed() {
     }
   }
   if (keyCode === RIGHT_ARROW) {
-    block.Left();
+    bobble.Right();
     if (end === false) {
-      bobble.Right();
+      block.Left();
     }
     last = left;
     left = false;
@@ -503,12 +583,13 @@ function keyPressed() {
     bobble.Stop();
   }
   //this is for the end game I wanted there to be seperate controls at the end so you had to think more about both
+  //fixed the syntax so it works
   if (end === true) {
-    if (key === 65) {
-      bobble.Left();
+    if (keyCode === 65) {
+      block.Left();
     }
-    if (key === 68) {
-      bobble.Right();
+    if (keyCode === 68) {
+      block.Right();
     }
   }
   //leftover put it elsewhere because it was slowing down the code

@@ -12,9 +12,9 @@ function setup() {
 }
 
 function draw() {
-  background(0,0,0,0);
+  background(80,80,80);
   //angle = slider.value();
-  stroke(40);
+  stroke(240);
   tree(200,height/5);
   tree(width-300,height/6);
 
